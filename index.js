@@ -17,8 +17,7 @@ async function run(){
     try{
         await client.connect();
     const database = client.db('online_service');
-    const servicesCollection = database.collection('services');
-    const ordersCollection = database.collection('order');
+        const servicesCollection = database.collection('services');
     //get services api
     app.get('/services', async(req,res)=>{
     const  cursor = servicesCollection.find({});
@@ -32,13 +31,6 @@ async function run(){
         const service = await servicesCollection.findOne(query);
         res.json(service);
     })
-    //POST API
-        app.post('/order', async (req, res) => {
-            const order = req.body;
-            const result = await ordersCollection.insertOne(order);
-            res.json(result);
-
-        })
     //Delete API
     app.delete('/services/:id', async(req,res)=>{
         const id = req.params.id;
